@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:layout_gravity="center"
     android:orientation="vertical"
-    tools:context="org.physical_web.physicalweb.TagData">
+    >
 
     <ScrollView
         android:layout_width="match_parent"
@@ -16,18 +16,21 @@
             android:orientation="vertical">
 
             <ImageView
-                android:layout_width="150dp"
+                android:layout_width="200dp"
                 android:layout_height="150dp"
-                android:padding="10dp"
+                android:paddingBottom="10dp"
+                android:paddingTop="30dp"
                 android:scaleType="fitXY"
                 android:src="@mipmap/ic_launcher"
-                android:layout_gravity="center_horizontal"/>
+                android:layout_gravity="center_horizontal"
+                android:id="@+id/logo"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="20dp"
                 android:text="Name"
+                android:textColor="#212121"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:typeface="monospace" />
 
@@ -38,8 +41,9 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="10dp"
                 android:text="Macys"
-                android:textColor="#575d61"
-                android:textAppearance="?android:attr/textAppearanceMedium"/>
+                android:textColor="#727272"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:typeface="monospace"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -48,7 +52,8 @@
                 android:layout_marginTop="15dp"
                 android:text="City"
                 android:typeface="monospace"
-                android:textAppearance="?android:attr/textAppearanceMedium"/>
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="#212121"/>
 
             <TextView
                 android:id="@+id/city"
@@ -57,8 +62,9 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="10dp"
                 android:text="Arlington"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textColor="#575d61"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="#727272"
+                android:typeface="monospace"
                 />
 
             <TextView
@@ -68,7 +74,9 @@
                 android:layout_marginTop="15dp"
                 android:text="Address"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:typeface="monospace" />
+                android:typeface="monospace"
+                android:textColor="#212121"
+                />
 
             <TextView
                 android:id="@+id/address"
@@ -76,9 +84,10 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="10dp"
-                android:text="UTA blvd"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textColor="#575d61" />
+                android:paddingLeft="20dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="#727272"
+                android:typeface="monospace"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -87,7 +96,8 @@
                 android:layout_marginTop="15dp"
                 android:text="Latitiude"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:typeface="monospace" />
+                android:typeface="monospace"
+                android:textColor="#212121"/>
 
             <TextView
                 android:id="@+id/latitude"
@@ -95,9 +105,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="10dp"
-                android:text="23.90"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textColor="#575d61" />
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="#727272"
+                android:typeface="monospace"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -106,7 +116,8 @@
                 android:layout_marginTop="15dp"
                 android:text="Longtiude"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:typeface="monospace" />
+                android:typeface="monospace"
+                android:textColor="#212121"/>
 
 
             <TextView
@@ -115,9 +126,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="10dp"
-                android:text="45.8"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textColor="#575d61" />
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="#727272"
+                android:typeface="monospace"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -126,7 +137,8 @@
                 android:layout_marginTop="15dp"
                 android:text="Zipcode"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:typeface="monospace" />
+                android:typeface="monospace"
+                android:textColor="#212121"/>
 
             <TextView
                 android:id="@+id/zipcode"
@@ -134,9 +146,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="10dp"
-                android:text="76031"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textColor="#575d61" />
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="#727272"
+                android:typeface="monospace"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -145,7 +157,8 @@
                 android:layout_marginTop="15dp"
                 android:text="Phone"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:typeface="monospace" />
+                android:typeface="monospace"
+                android:textColor="#212121"/>
 
             <TextView
                 android:id="@+id/phone"
@@ -153,9 +166,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="10dp"
-                android:text="1223-456"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textColor="#575d61" />
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="#727272"
+                android:typeface="monospace"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -164,7 +177,8 @@
                 android:layout_marginTop="15dp"
                 android:text="Store Id"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:typeface="monospace" />
+                android:typeface="monospace"
+                android:textColor="#212121"/>
 
             <TextView
                 android:id="@+id/storeId"
@@ -172,9 +186,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="10dp"
-                android:text="345"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textColor="#575d61" />
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="#727272"
+                android:typeface="monospace"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -183,7 +197,8 @@
                 android:layout_marginTop="15dp"
                 android:text="State"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:typeface="monospace" />
+                android:typeface="monospace"
+                android:textColor="#212121"/>
 
             <TextView
                 android:id="@+id/state"
@@ -191,9 +206,10 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="10dp"
-                android:text="TX"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textColor="#575d61" />
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="#727272"
+                android:typeface="monospace"
+                android:paddingBottom="15dp"/>
 
         </LinearLayout>
 

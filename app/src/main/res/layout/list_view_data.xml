@@ -22,7 +22,7 @@ android:layout_height="wrap_content" >
     android:layout_height="wrap_content"
     android:layout_alignTop="@+id/logo"
     android:layout_toRightOf="@id/logo"
-    android:textColor="#3b40e1"
+    android:textColor="#212121"
     android:typeface="monospace"
     android:textStyle="bold"
     android:paddingTop="10dp"
@@ -37,7 +37,8 @@ android:layout_height="wrap_content" >
     android:layout_toRightOf="@id/logo"
     android:typeface="monospace"
     android:paddingTop="5dp"
-    android:text="78987899"/>
+    android:text="78987899"
+    android:textColor="#727272"/>
 <TextView
     android:id="@+id/address"
     android:layout_width="wrap_content"
@@ -46,6 +47,7 @@ android:layout_height="wrap_content" >
     android:layout_toRightOf="@id/logo"
     android:typeface="monospace"
     android:paddingTop="5dp"
+    android:textColor="#727272"
     android:text="400 kerby st arlington "/>
 
 </RelativeLayout>

@@ -3,6 +3,7 @@ package com.savan.codingexercise;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -37,18 +38,7 @@ public class MainActivity extends AppCompatActivity {
     static String response;
     public static ArrayList<String> addArray,cityArray,nameArray,latArray,zipArray,logoArray,phoneArray,longArray,storeArray,stateArray;
     private static String url= "http://sandbox.bottlerocketapps.com/BR_Android_CodingExam_2015_Server/stores.json";
-    private static final String STORES_ARRAY ="stores";
-    private static final String ADDRESS="address";
-    private static final String CITY="city";
-    private static final String NAME="name";
-    private static final String LATITUDE="latitude";
-    private static final String ZIPCODE="zipcode";
-    private static final String STORELOGOURL="storeLogoURL";
-    private static final String PHONE="phone";
-    private static final String LONGITUDE="longitude";
-    private static final String STOREID="storeID";
-    private static final String STATE="state";
-
+    public static int lvPoistion;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
             new BgFetch().execute();
         }
         else{
-            Snackbar snack =Snackbar.make(findViewById(android.R.id.content),"No Internet Connection",Snackbar.LENGTH_LONG);
+            Snackbar snack =Snackbar.make(findViewById(android.R.id.content),"No Internet Connection",Snackbar.LENGTH_INDEFINITE);
             snack.setAction("GET ONLINE", new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -81,9 +71,6 @@ public class MainActivity extends AppCompatActivity {
             snack.setActionTextColor(Color.YELLOW);
             snack.show();
         }
-
-
-
 
     }
 
@@ -128,7 +115,6 @@ public class MainActivity extends AppCompatActivity {
                     for(int i = 0; i<jArray.length();i++){
                         JSONObject obj =jArray.getJSONObject(i);
                         number.add("i");
-                        //addArray,cityArray,nameArray,latArray,zipArray,logoArray,phoneArray,longArray,storeArray,stateArray
 
                         addArray.add(obj.getString("address"));
                         cityArray.add(obj.getString("city"));
@@ -136,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
                         latArray.add(obj.getString("latitude"));
                         zipArray.add(obj.getString("zipcode"));
                         logoArray.add(obj.getString("storeLogoURL"));
-                        phoneArray.add(obj.getString("name"));
+                        phoneArray.add(obj.getString("phone"));
                         longArray.add(obj.getString("longitude"));
                         storeArray.add(obj.getString("storeID"));
                         stateArray.add(obj.getString("state"));
@@ -168,11 +154,13 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                    // code like start activity and obtain code from view , texts  goes here
-                    String lvPoisiton = (String) ((TextView) view.findViewById(R.id.phone)).getText();
-                    Snackbar.make(view, lvPoisiton, Snackbar.LENGTH_LONG).show();
+                    lvPoistion = position;
+                    Bitmap bit =Bitmap.createBitmap((view.findViewById(R.id.logo)).getDrawingCache());
+                    Bundle bundle = new Bundle();
+                    bundle.putParcelable("Image",bit);
+                    bundle.putInt("position",lvPoistion);
                     Intent intent = new Intent(getBaseContext(), IndividualDetail.class);
-                    intent.putExtra("position", lvPoisiton);
+                    intent.putExtras(bundle);
                     startActivity(intent);
                 }
             });

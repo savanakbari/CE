@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 
+import com.squareup.picasso.Picasso;
 
 import java.io.InputStream;
 import java.net.URL;
@@ -26,7 +27,7 @@ public class CustomAdapter extends ArrayAdapter<String> {
 
     Bitmap bitmap;
     ImageView logo;
-    ArrayList<Bitmap> bitmapArray;
+
 
     CustomAdapter(Context context,ArrayList<String> tag)
     {
@@ -43,50 +44,19 @@ public class CustomAdapter extends ArrayAdapter<String> {
         TextView name     =  (TextView) viewCustom.findViewById(R.id.name);
         TextView phone     =  (TextView) viewCustom.findViewById(R.id.phone);
         TextView address     =  (TextView) viewCustom.findViewById(R.id.address);
-        bitmapArray = new ArrayList<Bitmap>();
+
         name.setText(MainActivity.nameArray.get(position));
         phone.setText(MainActivity.phoneArray.get(position));
         address.setText(MainActivity.addArray.get(position));
-      new BgImage().execute(MainActivity.logoArray.get(position));
-//       try {
-//           bitmap = BitmapFactory.decodeStream((InputStream) new URL(MainActivity.logoArray.get(position)).getContent());
-//           logo.setImageBitmap(bitmap);
-//           bitmap.recycle();
-//       }
-//       catch (Exception e)
-//       {e.printStackTrace();}
 
+        Picasso.with(getContext()).load(MainActivity.logoArray.get(position)).fit().into(logo);
+        logo.setDrawingCacheEnabled(true);
+        logo.buildDrawingCache(true);
 
-        return viewCustom;
+       return viewCustom;
     }
 
-    private class BgImage extends AsyncTask<String,Void,Bitmap>{
 
-        @Override
-        protected Bitmap doInBackground(String... args) {
-            try {
-                bitmap = BitmapFactory.decodeStream((InputStream) new URL(args[0]).getContent());
-                }
-            catch (Exception e)
-            {
-                e.printStackTrace();
-            }
-            return bitmap;
-        }
-
-        @Override
-        protected void onPostExecute(Bitmap image) {
-            if (image !=null)
-            {
-               // bitmapArray.add(image);
-                logo.setImageBitmap(image);
-            }
-            else
-            {
-                Log.e("IMAGE SET" , "Fail to set image");
-            }
-        }
-    }
 
 
 }
