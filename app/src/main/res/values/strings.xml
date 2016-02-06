@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">CodingExercise</string>
+    <string name="title_activity_cache">CacheActivity</string>
 </resources>

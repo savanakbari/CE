@@ -3,11 +3,13 @@ package com.savan.codingexercise;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
+import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -24,6 +26,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -34,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    ArrayList<String> number ;
+    public static ArrayList<String> number ;
     CustomAdapter customAdapter;
     Boolean activeConnection;
     static String response;
@@ -66,15 +69,35 @@ public class MainActivity extends AppCompatActivity {
             //Device not connected to internet
             // Show user Option to Turn ON WiFi
 
-            Snackbar snack =Snackbar.make(findViewById(android.R.id.content),"No Internet Connection",Snackbar.LENGTH_INDEFINITE);
-            snack.setAction("GET ONLINE", new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    startActivity(new Intent(Settings.ACTION_WIFI_SETTINGS));
-                }
-            });
-            snack.setActionTextColor(Color.YELLOW);
-            snack.show();
+
+            // check for shared preference file
+            File f = new File("/data/data/com.savan.codingexercise/shared_prefs/cache.xml");
+            if (f.exists()){
+                Log.e("Pref EXIST OR NOT ",  "EXIST");
+                Snackbar snackCache =Snackbar.make(findViewById(android.R.id.content),"No Internet Connection",Snackbar.LENGTH_INDEFINITE);
+                snackCache.setAction("View Cached Copy", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        startActivity(new Intent(getBaseContext(),CacheActivity.class));
+
+                    }
+                });
+                snackCache.setActionTextColor(Color.CYAN);
+                snackCache.show();
+            }
+            else{
+                Log.e("Pref EXIST OR NOT",  "NO");
+                Snackbar snack =Snackbar.make(findViewById(android.R.id.content),"No Internet Connection, Get Online to Cache Data",Snackbar.LENGTH_INDEFINITE);
+                snack.setAction("GET ONLINE", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        startActivity(new Intent(Settings.ACTION_WIFI_SETTINGS));
+                    }
+                });
+                snack.setActionTextColor(Color.YELLOW);
+                snack.show();
+            }
+
         }
 
     }
@@ -121,6 +144,12 @@ public class MainActivity extends AppCompatActivity {
 
                     JSONObject jObject = new JSONObject(response1);
                     JSONArray jArray =jObject.getJSONArray("stores");
+
+                    // Shared Preference File
+                    SharedPreferences sharedPref =getSharedPreferences("cache",Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPref.edit();
+                    editor.putString("jsonCache",response1);
+                    editor.apply();
 
                     for(int i = 0; i<jArray.length();i++){
                         JSONObject obj =jArray.getJSONObject(i);
@@ -198,7 +227,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
 
         switch (item.getItemId()) {
-                // Refresh Activity,  if no connection or to test connection
+            // Refresh Activity,  if no connection or to test connection
             case R.id.menu_refresh:
                 Intent intentRefresh = getIntent();
                 finish();
