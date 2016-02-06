@@ -21,6 +21,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -44,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
     public static ArrayList<String> addArray,cityArray,nameArray,latArray,zipArray,logoArray,phoneArray,longArray,storeArray,stateArray;
     private static String url= "http://sandbox.bottlerocketapps.com/BR_Android_CodingExam_2015_Server/stores.json";
     public static int lvPoistion;
+    public static String cachePath= "/data/data/com.savan.codingexercise/shared_prefs/cache.xml" ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,12 +68,12 @@ public class MainActivity extends AppCompatActivity {
             new BgFetch().execute();
         }
         else{
-            //Device not connected to internet
-            // Show user Option to Turn ON WiFi
 
-
-            // check for shared preference file
-            File f = new File("/data/data/com.savan.codingexercise/shared_prefs/cache.xml");
+          /* Device not connected to internet
+            Show user Option to Turn ON WiFi
+                    or
+            check for shared preference file */
+            File f = new File(cachePath);
             if (f.exists()){
                 Log.e("Pref EXIST OR NOT ",  "EXIST");
                 Snackbar snackCache =Snackbar.make(findViewById(android.R.id.content),"No Internet Connection",Snackbar.LENGTH_INDEFINITE);
@@ -211,6 +213,7 @@ public class MainActivity extends AppCompatActivity {
 
                     // After putting bundle in Intent, pass in to IndividualActivity
                     startActivity(intent);
+
                 }
             });
         }
@@ -227,16 +230,43 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
 
         switch (item.getItemId()) {
+
             // Refresh Activity,  if no connection or to test connection
             case R.id.menu_refresh:
                 Intent intentRefresh = getIntent();
                 finish();
                 startActivity(intentRefresh);
                 return true;
+
+            // Delete cache
+            case R.id.menu_clear_cache:
+                File clearFile = new File(cachePath);
+                if (clearFile.exists()){
+                    clearFile.delete();
+                    Snackbar.make(findViewById(android.R.id.content),"Cache Cleared",Snackbar.LENGTH_LONG).show();
+                    Intent intent1= getIntent();
+                    finish();
+                    startActivity(intent1);
+                }
+                else{
+                    Toast.makeText(getBaseContext(),"No Cache to clear",Toast.LENGTH_LONG).show();
+                }
+                return true;
             case R.id.menu_exit:
                 this.finish();
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        // Hide Clear Cache option if  app has active internet connection
+        MenuItem item = menu.findItem(R.id.menu_clear_cache);
+
+        if (activeConnection) {
+            item.setVisible (false);
+        }
+        return super.onPrepareOptionsMenu(menu);
     }
 }

@@ -3,6 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item android:id="@+id/menu_refresh" android:title="Refresh"
         android:orderInCategory="100" app:showAsAction="never" />
+    <item android:id="@+id/menu_clear_cache" android:title="Clear Cache"
+        android:orderInCategory="100" app:showAsAction="never" />
     <item android:id="@+id/menu_exit" android:title="Exit"
         android:orderInCategory="100" app:showAsAction="never" />
 </menu>
