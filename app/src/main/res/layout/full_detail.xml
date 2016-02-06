@@ -210,6 +210,17 @@
                 android:textColor="#727272"
                 android:typeface="monospace"
                 android:paddingBottom="15dp"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/mapButton"
+                android:text=" Direction "
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:background="@color/colorPrimary"
+                android:layout_marginBottom="30dp"
+                android:textColor="#fff"
+                android:typeface="monospace"
+                android:layout_gravity="center_horizontal"/>
 
         </LinearLayout>
 

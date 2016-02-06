@@ -16,6 +16,8 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import org.w3c.dom.Text;
+
 import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
@@ -27,7 +29,7 @@ public class CustomAdapter extends ArrayAdapter<String> {
 
     Bitmap bitmap;
     ImageView logo;
-
+    TextView name , phone , address;
 
     CustomAdapter(Context context,ArrayList<String> tag)
     {
@@ -40,16 +42,18 @@ public class CustomAdapter extends ArrayAdapter<String> {
         LayoutInflater inflator = LayoutInflater.from(getContext());
         View viewCustom = inflator.inflate(R.layout.list_view_data, parent, false);
 
-        logo =(ImageView)viewCustom.findViewById(R.id.logo);
-        TextView name     =  (TextView) viewCustom.findViewById(R.id.name);
-        TextView phone     =  (TextView) viewCustom.findViewById(R.id.phone);
-        TextView address     =  (TextView) viewCustom.findViewById(R.id.address);
+        logo = (ImageView)viewCustom.findViewById(R.id.logo);
+        name =  (TextView) viewCustom.findViewById(R.id.name);
+        phone=  (TextView) viewCustom.findViewById(R.id.phone);
+        address=  (TextView) viewCustom.findViewById(R.id.address);
 
+        // Fetch items from respective array.
         name.setText(MainActivity.nameArray.get(position));
         phone.setText(MainActivity.phoneArray.get(position));
         address.setText(MainActivity.addArray.get(position));
 
         Picasso.with(getContext()).load(MainActivity.logoArray.get(position)).fit().into(logo);
+        // Cache Image , for sending it to another activity via Bundle
         logo.setDrawingCacheEnabled(true);
         logo.buildDrawingCache(true);
 
